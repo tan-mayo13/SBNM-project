@@ -1,0 +1,4 @@
+Comparison,Mean_Spearman_Correlation,Number_of_Pairs
+Tumour-Tumour,0.30724431762334564,1653
+Normal-Normal,0.5611336080050225,1176
+Tumour-Normal,0.40537092436578187,2842
