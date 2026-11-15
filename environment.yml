@@ -1,15 +1,17 @@
 name: lioness
 channels:
-  - defaults
+  - conda-forge
 dependencies:
   - python=3.10
+  - numpy
+  - pandas
+  - scipy
   - matplotlib
   - seaborn
   - networkx
-  - scipy
-  - pandas
-  - jupyterlab
   - scikit-learn
-  - numpy
-  - netzoopy
-prefix: /home/tanmayee/miniconda3/envs/lioness
+  - jupyterlab
+  - pip
+  - pip:
+      - netZooPy
+      - setuptools==80.10.2

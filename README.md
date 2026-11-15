@@ -4,9 +4,9 @@ Course project, CB5313 Systems Biology and Network Modelling (topic 3).
 
 ## Question
 
-Do sample-specific networks estimated with LIONESS differ in how similar they are
+Do LIONESS estimated sample-specific networks differ in how similar they are
 within tumour samples and within normal samples, and does this tell us anything
-beyond what the expression data already show?
+beyond what the expression data already shows?
 
 ## Method in brief
 
@@ -55,7 +55,7 @@ Outputs are written to `results/`.
 5. Threshold sensitivity: 90th, 95th and 99th percentile of pooled absolute edge weights,
    and per-sample network density at each threshold.
 
-### Changes beyond the tutorial
+### Changes made
 
 - New dataset (GSE10072).
 - Label-permutation test for the Normal-Normal minus Tumour-Tumour gap.
@@ -109,11 +109,13 @@ the pair counts.
 
 ## Interpretation
 
-[Write this section in your own words. Suggested points to cover:
-- What the Normal > Tumour pattern shows and how far it can be trusted (permutation test, sweep, random probes).
-- Why Tumour-Normal is above Tumour-Tumour in the networks but not in expression (z-score product).
-- What this means for what LIONESS adds in this setup.
-- What you would NOT conclude (regulation, causality, validated interactions).]
+The normal tissue networks are more similar to each other compared to tumour networks and since permutation p < 0.001, this difference is not due to chance . Tumour networks are more heterogenous. The pattern was same for every gene set which includes random probes This shows it does not depend on choosing the most variable probes. The same is seen in the expression profiles themselves, so the heterogeneity among tumour samples can be seen in the expression data, and the networks do not add independent evidence for it. A plausible biological reading is that lung adenocarcinomas differ more from one another than normal lung tissue does, but this analysis does not test that directly.
+
+The networks do differ from expression in one way. In expression, tumour and normal samples are clearly separated (Tumour-Normal similarity is below Tumour-Tumour). The tumour heterogeneity was already in the original gene expression data. In the networks, Tumour-Normal similarity is higher than Tumour-Tumour. The z-score product analysis offers an explanation: LIONESS edges here follow the product of the two genes' z-scores (median r = 0.96), a product does not change when both genes flip direction, and a product-only network reproduces the pattern. In this setup the LIONESS edges behave mostly like a sample-wise co-expression score, and they add little beyond what the expression data already contains. With random probes, the network gap is larger than the expression gap (0.110 against 0.027), so pair-wise co-deviation may capture a group difference that overall expression similarity dilutes, but this was not tested further.
+
+Tumour networks also have denser strong edges (mean density 0.140 against 0.053 at the 90th percentile), meaning that tumour samples carry more extreme edge weights. A patient's tumour is not closer to their own normal sample than to other normals, so the patient pairing does not seem to drive the similarity results, although this rests on only 33 pairs.
+
+But these results do not show: the edges are inferred associations, not validated regulatory interactions, and they say nothing about causality.
 
 ## Limitations
 
@@ -129,8 +131,7 @@ the pair counts.
 
 ## AI use
 
-[State how AI assistance was used, per the course policy, e.g. help with debugging and
-reviewing code, and checking numbers. The synopsis and the biological interpretation are my own.]
+AI usage includes ChatGPT for the initial notebook and then Claude for further help in debugging and restructuring the notebook and suggesting additional checks (a permutation test, an expression-similarity control, a gene-set sweep and a z-score product comparison). Also used AI for explanation of the paper, LIONESS, LIONESS output, explantations of different aggregate network recontruction methods like PANDA, Pearson correlation, mutual information and CLR, and feedback for the drafts. 
 
 ## References
 
